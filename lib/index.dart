@@ -1,5 +1,7 @@
 // Export pages
-export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
-export '/pages/detail_pet_page/detail_pet_page_widget.dart'
-    show DetailPetPageWidget;
-export '/pages/add_pet_page/add_pet_page_widget.dart' show AddPetPageWidget;
+export '/login/login_widget.dart' show LoginWidget;
+export '/home/home_widget.dart' show HomeWidget;
+export '/step_list/step_list_widget.dart' show StepListWidget;
+export '/evaluations/evaluations_widget.dart' show EvaluationsWidget;
+export '/step_create/step_create_widget.dart' show StepCreateWidget;
+export '/step_update/step_update_widget.dart' show StepUpdateWidget;

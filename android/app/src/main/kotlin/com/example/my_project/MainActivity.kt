@@ -1,4 +1,4 @@
-package com.mycompany.test
+package it.ah.pocpourmat
 
 import io.flutter.embedding.android.FlutterActivity
 

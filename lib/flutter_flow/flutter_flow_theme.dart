@@ -181,92 +181,107 @@ class ThemeTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Outfit';
-  TextStyle get displayLarge => GoogleFonts.outfit(
+  String get displayLargeFamily => 'Inter Tight';
+  TextStyle get displayLarge => GoogleFonts.getFont(
+        'Inter Tight',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Outfit';
-  TextStyle get displayMedium => GoogleFonts.outfit(
+  String get displayMediumFamily => 'Inter Tight';
+  TextStyle get displayMedium => GoogleFonts.getFont(
+        'Inter Tight',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Outfit';
-  TextStyle get displaySmall => GoogleFonts.outfit(
+  String get displaySmallFamily => 'Inter Tight';
+  TextStyle get displaySmall => GoogleFonts.getFont(
+        'Inter Tight',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Outfit';
-  TextStyle get headlineLarge => GoogleFonts.outfit(
+  String get headlineLargeFamily => 'Inter Tight';
+  TextStyle get headlineLarge => GoogleFonts.getFont(
+        'Inter Tight',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Outfit';
-  TextStyle get headlineMedium => GoogleFonts.outfit(
+  String get headlineMediumFamily => 'Inter Tight';
+  TextStyle get headlineMedium => GoogleFonts.getFont(
+        'Inter Tight',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
+        fontSize: 28.0,
+      );
+  String get headlineSmallFamily => 'Inter Tight';
+  TextStyle get headlineSmall => GoogleFonts.getFont(
+        'Inter Tight',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get headlineSmallFamily => 'Outfit';
-  TextStyle get headlineSmall => GoogleFonts.outfit(
+  String get titleLargeFamily => 'Inter Tight';
+  TextStyle get titleLarge => GoogleFonts.getFont(
+        'Inter Tight',
         color: theme.primaryText,
-        fontWeight: FontWeight.w500,
-        fontSize: 24.0,
+        fontWeight: FontWeight.w600,
+        fontSize: 20.0,
       );
-  String get titleLargeFamily => 'Outfit';
-  TextStyle get titleLarge => GoogleFonts.outfit(
+  String get titleMediumFamily => 'Inter Tight';
+  TextStyle get titleMedium => GoogleFonts.getFont(
+        'Inter Tight',
         color: theme.primaryText,
-        fontWeight: FontWeight.w500,
-        fontSize: 22.0,
-      );
-  String get titleMediumFamily => 'Readex Pro';
-  TextStyle get titleMedium => GoogleFonts.readexPro(
-        color: theme.info,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Readex Pro';
-  TextStyle get titleSmall => GoogleFonts.readexPro(
-        color: theme.info,
-        fontWeight: FontWeight.w500,
+  String get titleSmallFamily => 'Inter Tight';
+  TextStyle get titleSmall => GoogleFonts.getFont(
+        'Inter Tight',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Readex Pro';
-  TextStyle get labelLarge => GoogleFonts.readexPro(
+  String get labelLargeFamily => 'Inter';
+  TextStyle get labelLarge => GoogleFonts.getFont(
+        'Inter',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Readex Pro';
-  TextStyle get labelMedium => GoogleFonts.readexPro(
+  String get labelMediumFamily => 'Inter';
+  TextStyle get labelMedium => GoogleFonts.getFont(
+        'Inter',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Readex Pro';
-  TextStyle get labelSmall => GoogleFonts.readexPro(
+  String get labelSmallFamily => 'Inter';
+  TextStyle get labelSmall => GoogleFonts.getFont(
+        'Inter',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Readex Pro';
-  TextStyle get bodyLarge => GoogleFonts.readexPro(
+  String get bodyLargeFamily => 'Inter';
+  TextStyle get bodyLarge => GoogleFonts.getFont(
+        'Inter',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Readex Pro';
-  TextStyle get bodyMedium => GoogleFonts.readexPro(
+  String get bodyMediumFamily => 'Inter';
+  TextStyle get bodyMedium => GoogleFonts.getFont(
+        'Inter',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Readex Pro';
-  TextStyle get bodySmall => GoogleFonts.readexPro(
+  String get bodySmallFamily => 'Inter';
+  TextStyle get bodySmall => GoogleFonts.getFont(
+        'Inter',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -301,43 +316,38 @@ class DarkModeTheme extends FlutterFlowTheme {
 
 extension TextStyleHelper on TextStyle {
   TextStyle override({
-    TextStyle? font,
     String? fontFamily,
     Color? color,
     double? fontSize,
     FontWeight? fontWeight,
     double? letterSpacing,
     FontStyle? fontStyle,
-    bool useGoogleFonts = false,
+    bool useGoogleFonts = true,
     TextDecoration? decoration,
     double? lineHeight,
     List<Shadow>? shadows,
-  }) {
-    if (useGoogleFonts && fontFamily != null) {
-      font = GoogleFonts.getFont(fontFamily);
-    }
-
-    return font != null
-        ? font.copyWith(
-            color: color ?? this.color,
-            fontSize: fontSize ?? this.fontSize,
-            letterSpacing: letterSpacing ?? this.letterSpacing,
-            fontWeight: fontWeight ?? this.fontWeight,
-            fontStyle: fontStyle ?? this.fontStyle,
-            decoration: decoration,
-            height: lineHeight,
-            shadows: shadows,
-          )
-        : copyWith(
-            fontFamily: fontFamily,
-            color: color,
-            fontSize: fontSize,
-            letterSpacing: letterSpacing,
-            fontWeight: fontWeight,
-            fontStyle: fontStyle,
-            decoration: decoration,
-            height: lineHeight,
-            shadows: shadows,
-          );
-  }
+  }) =>
+      useGoogleFonts
+          ? GoogleFonts.getFont(
+              fontFamily!,
+              color: color ?? this.color,
+              fontSize: fontSize ?? this.fontSize,
+              letterSpacing: letterSpacing ?? this.letterSpacing,
+              fontWeight: fontWeight ?? this.fontWeight,
+              fontStyle: fontStyle ?? this.fontStyle,
+              decoration: decoration,
+              height: lineHeight,
+              shadows: shadows,
+            )
+          : copyWith(
+              fontFamily: fontFamily,
+              color: color,
+              fontSize: fontSize,
+              letterSpacing: letterSpacing,
+              fontWeight: fontWeight,
+              fontStyle: fontStyle,
+              decoration: decoration,
+              height: lineHeight,
+              shadows: shadows,
+            );
 }
