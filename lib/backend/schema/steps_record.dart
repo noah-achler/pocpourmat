@@ -26,9 +26,15 @@ class StepsRecord extends FirestoreRecord {
   String get description => _description ?? '';
   bool hasDescription() => _description != null;
 
+  // "timestamp" field.
+  DateTime? _timestamp;
+  DateTime? get timestamp => _timestamp;
+  bool hasTimestamp() => _timestamp != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _description = snapshotData['description'] as String?;
+    _timestamp = snapshotData['timestamp'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -67,11 +73,13 @@ class StepsRecord extends FirestoreRecord {
 Map<String, dynamic> createStepsRecordData({
   String? name,
   String? description,
+  DateTime? timestamp,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'name': name,
       'description': description,
+      'timestamp': timestamp,
     }.withoutNulls,
   );
 
@@ -83,12 +91,14 @@ class StepsRecordDocumentEquality implements Equality<StepsRecord> {
 
   @override
   bool equals(StepsRecord? e1, StepsRecord? e2) {
-    return e1?.name == e2?.name && e1?.description == e2?.description;
+    return e1?.name == e2?.name &&
+        e1?.description == e2?.description &&
+        e1?.timestamp == e2?.timestamp;
   }
 
   @override
   int hash(StepsRecord? e) =>
-      const ListEquality().hash([e?.name, e?.description]);
+      const ListEquality().hash([e?.name, e?.description, e?.timestamp]);
 
   @override
   bool isValidKey(Object? o) => o is StepsRecord;

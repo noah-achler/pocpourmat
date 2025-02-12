@@ -272,6 +272,7 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                                 name: _model.nameTextController.text,
                                 description:
                                     _model.descriptionTextController.text,
+                                timestamp: getCurrentTimestamp,
                               ));
 
                               context.pushNamed('step_list');

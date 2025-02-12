@@ -31,10 +31,16 @@ class EvaluationsRecord extends FirestoreRecord {
   int get position => _position ?? 0;
   bool hasPosition() => _position != null;
 
+  // "timestamp" field.
+  DateTime? _timestamp;
+  DateTime? get timestamp => _timestamp;
+  bool hasTimestamp() => _timestamp != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _description = snapshotData['description'] as String?;
     _position = castToType<int>(snapshotData['position']);
+    _timestamp = snapshotData['timestamp'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -75,12 +81,14 @@ Map<String, dynamic> createEvaluationsRecordData({
   String? name,
   String? description,
   int? position,
+  DateTime? timestamp,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'name': name,
       'description': description,
       'position': position,
+      'timestamp': timestamp,
     }.withoutNulls,
   );
 
@@ -94,12 +102,13 @@ class EvaluationsRecordDocumentEquality implements Equality<EvaluationsRecord> {
   bool equals(EvaluationsRecord? e1, EvaluationsRecord? e2) {
     return e1?.name == e2?.name &&
         e1?.description == e2?.description &&
-        e1?.position == e2?.position;
+        e1?.position == e2?.position &&
+        e1?.timestamp == e2?.timestamp;
   }
 
   @override
-  int hash(EvaluationsRecord? e) =>
-      const ListEquality().hash([e?.name, e?.description, e?.position]);
+  int hash(EvaluationsRecord? e) => const ListEquality()
+      .hash([e?.name, e?.description, e?.position, e?.timestamp]);
 
   @override
   bool isValidKey(Object? o) => o is EvaluationsRecord;

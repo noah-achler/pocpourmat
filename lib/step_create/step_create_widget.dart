@@ -216,11 +216,13 @@ class _StepCreateWidgetState extends State<StepCreateWidget> {
                     await stepsRecordReference.set(createStepsRecordData(
                       name: _model.nameTextController.text,
                       description: _model.descriptionTextController.text,
+                      timestamp: getCurrentTimestamp,
                     ));
                     _model.result = StepsRecord.getDocumentFromData(
                         createStepsRecordData(
                           name: _model.nameTextController.text,
                           description: _model.descriptionTextController.text,
+                          timestamp: getCurrentTimestamp,
                         ),
                         stepsRecordReference);
 
