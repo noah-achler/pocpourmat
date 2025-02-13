@@ -8,8 +8,8 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class EvaluationStruct extends FFFirebaseStruct {
-  EvaluationStruct({
+class CriteriaStruct extends FFFirebaseStruct {
+  CriteriaStruct({
     String? id,
     String? name,
     String? description,
@@ -51,17 +51,15 @@ class EvaluationStruct extends FFFirebaseStruct {
 
   bool hasPosition() => _position != null;
 
-  static EvaluationStruct fromMap(Map<String, dynamic> data) =>
-      EvaluationStruct(
+  static CriteriaStruct fromMap(Map<String, dynamic> data) => CriteriaStruct(
         id: data['id'] as String?,
         name: data['name'] as String?,
         description: data['description'] as String?,
         position: castToType<int>(data['position']),
       );
 
-  static EvaluationStruct? maybeFromMap(dynamic data) => data is Map
-      ? EvaluationStruct.fromMap(data.cast<String, dynamic>())
-      : null;
+  static CriteriaStruct? maybeFromMap(dynamic data) =>
+      data is Map ? CriteriaStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,
@@ -90,8 +88,8 @@ class EvaluationStruct extends FFFirebaseStruct {
         ),
       }.withoutNulls;
 
-  static EvaluationStruct fromSerializableMap(Map<String, dynamic> data) =>
-      EvaluationStruct(
+  static CriteriaStruct fromSerializableMap(Map<String, dynamic> data) =>
+      CriteriaStruct(
         id: deserializeParam(
           data['id'],
           ParamType.String,
@@ -115,11 +113,11 @@ class EvaluationStruct extends FFFirebaseStruct {
       );
 
   @override
-  String toString() => 'EvaluationStruct(${toMap()})';
+  String toString() => 'CriteriaStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is EvaluationStruct &&
+    return other is CriteriaStruct &&
         id == other.id &&
         name == other.name &&
         description == other.description &&
@@ -131,7 +129,7 @@ class EvaluationStruct extends FFFirebaseStruct {
       const ListEquality().hash([id, name, description, position]);
 }
 
-EvaluationStruct createEvaluationStruct({
+CriteriaStruct createCriteriaStruct({
   String? id,
   String? name,
   String? description,
@@ -141,7 +139,7 @@ EvaluationStruct createEvaluationStruct({
   bool create = false,
   bool delete = false,
 }) =>
-    EvaluationStruct(
+    CriteriaStruct(
       id: id,
       name: name,
       description: description,
@@ -154,61 +152,61 @@ EvaluationStruct createEvaluationStruct({
       ),
     );
 
-EvaluationStruct? updateEvaluationStruct(
-  EvaluationStruct? evaluation, {
+CriteriaStruct? updateCriteriaStruct(
+  CriteriaStruct? criteria, {
   bool clearUnsetFields = true,
   bool create = false,
 }) =>
-    evaluation
+    criteria
       ?..firestoreUtilData = FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
       );
 
-void addEvaluationStructData(
+void addCriteriaStructData(
   Map<String, dynamic> firestoreData,
-  EvaluationStruct? evaluation,
+  CriteriaStruct? criteria,
   String fieldName, [
   bool forFieldValue = false,
 ]) {
   firestoreData.remove(fieldName);
-  if (evaluation == null) {
+  if (criteria == null) {
     return;
   }
-  if (evaluation.firestoreUtilData.delete) {
+  if (criteria.firestoreUtilData.delete) {
     firestoreData[fieldName] = FieldValue.delete();
     return;
   }
   final clearFields =
-      !forFieldValue && evaluation.firestoreUtilData.clearUnsetFields;
+      !forFieldValue && criteria.firestoreUtilData.clearUnsetFields;
   if (clearFields) {
     firestoreData[fieldName] = <String, dynamic>{};
   }
-  final evaluationData = getEvaluationFirestoreData(evaluation, forFieldValue);
-  final nestedData = evaluationData.map((k, v) => MapEntry('$fieldName.$k', v));
+  final criteriaData = getCriteriaFirestoreData(criteria, forFieldValue);
+  final nestedData = criteriaData.map((k, v) => MapEntry('$fieldName.$k', v));
 
-  final mergeFields = evaluation.firestoreUtilData.create || clearFields;
+  final mergeFields = criteria.firestoreUtilData.create || clearFields;
   firestoreData
       .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
 }
 
-Map<String, dynamic> getEvaluationFirestoreData(
-  EvaluationStruct? evaluation, [
+Map<String, dynamic> getCriteriaFirestoreData(
+  CriteriaStruct? criteria, [
   bool forFieldValue = false,
 ]) {
-  if (evaluation == null) {
+  if (criteria == null) {
     return {};
   }
-  final firestoreData = mapToFirestore(evaluation.toMap());
+  final firestoreData = mapToFirestore(criteria.toMap());
 
   // Add any Firestore field values
-  evaluation.firestoreUtilData.fieldValues
+  criteria.firestoreUtilData.fieldValues
       .forEach((k, v) => firestoreData[k] = v);
 
   return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
 }
 
-List<Map<String, dynamic>> getEvaluationListFirestoreData(
-  List<EvaluationStruct>? evaluations,
+List<Map<String, dynamic>> getCriteriaListFirestoreData(
+  List<CriteriaStruct>? criterias,
 ) =>
-    evaluations?.map((e) => getEvaluationFirestoreData(e, true)).toList() ?? [];
+    criterias?.map((e) => getCriteriaFirestoreData(e, true)).toList() ?? [];

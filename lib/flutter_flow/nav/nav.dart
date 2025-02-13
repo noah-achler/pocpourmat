@@ -107,9 +107,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => StepListWidget(),
         ),
         FFRoute(
-          name: 'evaluations',
-          path: '/evaluations',
-          builder: (context, params) => EvaluationsWidget(),
+          name: 'criteria',
+          path: '/criteria',
+          builder: (context, params) => CriteriaWidget(),
         ),
         FFRoute(
           name: 'step_create',
@@ -120,11 +120,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'step_update',
           path: '/step_update',
           builder: (context, params) => StepUpdateWidget(
-            id: params.getParam(
-              'id',
-              ParamType.String,
+            ref: params.getParam(
+              'ref',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['steps'],
             ),
           ),
+        ),
+        FFRoute(
+          name: 'grid',
+          path: '/grid',
+          builder: (context, params) => GridWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

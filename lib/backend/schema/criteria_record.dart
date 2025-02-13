@@ -8,8 +8,8 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class EvaluationsRecord extends FirestoreRecord {
-  EvaluationsRecord._(
+class CriteriaRecord extends FirestoreRecord {
+  CriteriaRecord._(
     DocumentReference reference,
     Map<String, dynamic> data,
   ) : super(reference, data) {
@@ -44,40 +44,40 @@ class EvaluationsRecord extends FirestoreRecord {
   }
 
   static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('evaluations');
+      FirebaseFirestore.instance.collection('criteria');
 
-  static Stream<EvaluationsRecord> getDocument(DocumentReference ref) =>
-      ref.snapshots().map((s) => EvaluationsRecord.fromSnapshot(s));
+  static Stream<CriteriaRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => CriteriaRecord.fromSnapshot(s));
 
-  static Future<EvaluationsRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then((s) => EvaluationsRecord.fromSnapshot(s));
+  static Future<CriteriaRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => CriteriaRecord.fromSnapshot(s));
 
-  static EvaluationsRecord fromSnapshot(DocumentSnapshot snapshot) =>
-      EvaluationsRecord._(
+  static CriteriaRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      CriteriaRecord._(
         snapshot.reference,
         mapFromFirestore(snapshot.data() as Map<String, dynamic>),
       );
 
-  static EvaluationsRecord getDocumentFromData(
+  static CriteriaRecord getDocumentFromData(
     Map<String, dynamic> data,
     DocumentReference reference,
   ) =>
-      EvaluationsRecord._(reference, mapFromFirestore(data));
+      CriteriaRecord._(reference, mapFromFirestore(data));
 
   @override
   String toString() =>
-      'EvaluationsRecord(reference: ${reference.path}, data: $snapshotData)';
+      'CriteriaRecord(reference: ${reference.path}, data: $snapshotData)';
 
   @override
   int get hashCode => reference.path.hashCode;
 
   @override
   bool operator ==(other) =>
-      other is EvaluationsRecord &&
+      other is CriteriaRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
 }
 
-Map<String, dynamic> createEvaluationsRecordData({
+Map<String, dynamic> createCriteriaRecordData({
   String? name,
   String? description,
   int? position,
@@ -95,11 +95,11 @@ Map<String, dynamic> createEvaluationsRecordData({
   return firestoreData;
 }
 
-class EvaluationsRecordDocumentEquality implements Equality<EvaluationsRecord> {
-  const EvaluationsRecordDocumentEquality();
+class CriteriaRecordDocumentEquality implements Equality<CriteriaRecord> {
+  const CriteriaRecordDocumentEquality();
 
   @override
-  bool equals(EvaluationsRecord? e1, EvaluationsRecord? e2) {
+  bool equals(CriteriaRecord? e1, CriteriaRecord? e2) {
     return e1?.name == e2?.name &&
         e1?.description == e2?.description &&
         e1?.position == e2?.position &&
@@ -107,9 +107,9 @@ class EvaluationsRecordDocumentEquality implements Equality<EvaluationsRecord> {
   }
 
   @override
-  int hash(EvaluationsRecord? e) => const ListEquality()
+  int hash(CriteriaRecord? e) => const ListEquality()
       .hash([e?.name, e?.description, e?.position, e?.timestamp]);
 
   @override
-  bool isValidKey(Object? o) => o is EvaluationsRecord;
+  bool isValidKey(Object? o) => o is CriteriaRecord;
 }

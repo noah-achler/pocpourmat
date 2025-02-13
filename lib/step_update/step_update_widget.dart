@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -15,10 +16,10 @@ export 'step_update_model.dart';
 class StepUpdateWidget extends StatefulWidget {
   const StepUpdateWidget({
     super.key,
-    required this.id,
+    required this.ref,
   });
 
-  final String? id;
+  final DocumentReference? ref;
 
   @override
   State<StepUpdateWidget> createState() => _StepUpdateWidgetState();
@@ -50,10 +51,8 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<StepsRecord>>(
-      stream: queryStepsRecord(
-        singleRecord: true,
-      ),
+    return StreamBuilder<StepsRecord>(
+      stream: StepsRecord.getDocument(widget!.ref!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -72,14 +71,8 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
             ),
           );
         }
-        List<StepsRecord> stepUpdateStepsRecordList = snapshot.data!;
-        // Return an empty Container when the item does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
-        final stepUpdateStepsRecord = stepUpdateStepsRecordList.isNotEmpty
-            ? stepUpdateStepsRecordList.first
-            : null;
+
+        final stepUpdateStepsRecord = snapshot.data!;
 
         return GestureDetector(
           onTap: () {
@@ -101,7 +94,25 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                       letterSpacing: 0.0,
                     ),
               ),
-              actions: [],
+              actions: [
+                FlutterFlowIconButton(
+                  borderRadius: 8.0,
+                  buttonSize: 40.0,
+                  fillColor: FlutterFlowTheme.of(context).primary,
+                  icon: Icon(
+                    Icons.logout_rounded,
+                    color: FlutterFlowTheme.of(context).info,
+                    size: 24.0,
+                  ),
+                  onPressed: () async {
+                    GoRouter.of(context).prepareAuthEvent();
+                    await authManager.signOut();
+                    GoRouter.of(context).clearRedirectLocation();
+
+                    context.goNamedAuth('login', context.mounted);
+                  },
+                ),
+              ],
               centerTitle: false,
               elevation: 2.0,
             ),
@@ -120,7 +131,7 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                         child: TextFormField(
                           controller: _model.nameTextController ??=
                               TextEditingController(
-                            text: stepUpdateStepsRecord?.name,
+                            text: stepUpdateStepsRecord.name,
                           ),
                           focusNode: _model.nameFocusNode,
                           autofocus: false,
@@ -191,7 +202,7 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                       child: TextFormField(
                         controller: _model.descriptionTextController ??=
                             TextEditingController(
-                          text: stepUpdateStepsRecord?.description,
+                          text: stepUpdateStepsRecord.description,
                         ),
                         focusNode: _model.descriptionFocusNode,
                         autofocus: false,
@@ -267,7 +278,7 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                               10.0, 0.0, 10.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              await stepUpdateStepsRecord!.reference
+                              await stepUpdateStepsRecord.reference
                                   .update(createStepsRecordData(
                                 name: _model.nameTextController.text,
                                 description:
@@ -299,7 +310,7 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                         ),
                         FFButtonWidget(
                           onPressed: () async {
-                            await stepUpdateStepsRecord!.reference.delete();
+                            await stepUpdateStepsRecord.reference.delete();
                             if (Navigator.of(context).canPop()) {
                               context.pop();
                             }

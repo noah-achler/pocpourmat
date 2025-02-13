@@ -1,4 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -70,7 +72,25 @@ class _StepListWidgetState extends State<StepListWidget> {
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: [],
+          actions: [
+            FlutterFlowIconButton(
+              borderRadius: 8.0,
+              buttonSize: 40.0,
+              fillColor: FlutterFlowTheme.of(context).primary,
+              icon: Icon(
+                Icons.logout_rounded,
+                color: FlutterFlowTheme.of(context).info,
+                size: 24.0,
+              ),
+              onPressed: () async {
+                GoRouter.of(context).prepareAuthEvent();
+                await authManager.signOut();
+                GoRouter.of(context).clearRedirectLocation();
+
+                context.goNamedAuth('login', context.mounted);
+              },
+            ),
+          ],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -116,9 +136,9 @@ class _StepListWidgetState extends State<StepListWidget> {
                             context.pushNamed(
                               'step_update',
                               queryParameters: {
-                                'id': serializeParam(
-                                  listViewStepsRecord.reference.id,
-                                  ParamType.String,
+                                'ref': serializeParam(
+                                  listViewStepsRecord.reference,
+                                  ParamType.DocumentReference,
                                 ),
                               }.withoutNulls,
                             );
