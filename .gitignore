@@ -25,3 +25,8 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+android/app/src/debug/debug.iml
+android/app/src/profile/profile.iml
+pocpourmat.iml
+pocpourmat.ipr
+pocpourmat.iws
