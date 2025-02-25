@@ -10,28 +10,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'step_create_model.dart';
-export 'step_create_model.dart';
+import 'criteria_create_model.dart';
+export 'criteria_create_model.dart';
 
-class StepCreateWidget extends StatefulWidget {
-  const StepCreateWidget({super.key});
+class CriteriaCreateWidget extends StatefulWidget {
+  const CriteriaCreateWidget({super.key});
 
-  static String routeName = 'step_create';
-  static String routePath = '/step_create';
+  static String routeName = 'criteria_create';
+  static String routePath = '/criteria_create';
 
   @override
-  State<StepCreateWidget> createState() => _StepCreateWidgetState();
+  State<CriteriaCreateWidget> createState() => _CriteriaCreateWidgetState();
 }
 
-class _StepCreateWidgetState extends State<StepCreateWidget> {
-  late StepCreateModel _model;
+class _CriteriaCreateWidgetState extends State<CriteriaCreateWidget> {
+  late CriteriaCreateModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => StepCreateModel());
+    _model = createModel(context, () => CriteriaCreateModel());
 
     _model.nameTextController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
@@ -235,21 +235,22 @@ class _StepCreateWidgetState extends State<StepCreateWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    var stepsRecordReference = StepsRecord.collection.doc();
-                    await stepsRecordReference.set(createStepsRecordData(
+                    var criteriaRecordReference =
+                        CriteriaRecord.collection.doc();
+                    await criteriaRecordReference.set(createCriteriaRecordData(
                       name: _model.nameTextController.text,
                       description: _model.descriptionTextController.text,
                       timestamp: getCurrentTimestamp,
                     ));
-                    _model.result = StepsRecord.getDocumentFromData(
-                        createStepsRecordData(
+                    _model.result = CriteriaRecord.getDocumentFromData(
+                        createCriteriaRecordData(
                           name: _model.nameTextController.text,
                           description: _model.descriptionTextController.text,
                           timestamp: getCurrentTimestamp,
                         ),
-                        stepsRecordReference);
+                        criteriaRecordReference);
 
-                    context.pushNamed(StepListWidget.routeName);
+                    context.pushNamed(CriteriaListWidget.routeName);
 
                     safeSetState(() {});
                   },

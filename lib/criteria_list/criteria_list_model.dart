@@ -1,15 +1,17 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
-import 'criteria_widget.dart' show CriteriaWidget;
+import '/index.dart';
+import 'criteria_list_widget.dart' show CriteriaListWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CriteriaModel extends FlutterFlowModel<CriteriaWidget> {
+class CriteriaListModel extends FlutterFlowModel<CriteriaListWidget> {
   @override
   void initState(BuildContext context) {}
 

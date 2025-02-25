@@ -13,12 +13,10 @@ class CriteriaStruct extends FFFirebaseStruct {
     String? id,
     String? name,
     String? description,
-    int? position,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _name = name,
         _description = description,
-        _position = position,
         super(firestoreUtilData);
 
   // "id" field.
@@ -42,20 +40,10 @@ class CriteriaStruct extends FFFirebaseStruct {
 
   bool hasDescription() => _description != null;
 
-  // "position" field.
-  int? _position;
-  int get position => _position ?? 0;
-  set position(int? val) => _position = val;
-
-  void incrementPosition(int amount) => position = position + amount;
-
-  bool hasPosition() => _position != null;
-
   static CriteriaStruct fromMap(Map<String, dynamic> data) => CriteriaStruct(
         id: data['id'] as String?,
         name: data['name'] as String?,
         description: data['description'] as String?,
-        position: castToType<int>(data['position']),
       );
 
   static CriteriaStruct? maybeFromMap(dynamic data) =>
@@ -65,7 +53,6 @@ class CriteriaStruct extends FFFirebaseStruct {
         'id': _id,
         'name': _name,
         'description': _description,
-        'position': _position,
       }.withoutNulls;
 
   @override
@@ -81,10 +68,6 @@ class CriteriaStruct extends FFFirebaseStruct {
         'description': serializeParam(
           _description,
           ParamType.String,
-        ),
-        'position': serializeParam(
-          _position,
-          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -105,11 +88,6 @@ class CriteriaStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        position: deserializeParam(
-          data['position'],
-          ParamType.int,
-          false,
-        ),
       );
 
   @override
@@ -120,20 +98,17 @@ class CriteriaStruct extends FFFirebaseStruct {
     return other is CriteriaStruct &&
         id == other.id &&
         name == other.name &&
-        description == other.description &&
-        position == other.position;
+        description == other.description;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([id, name, description, position]);
+  int get hashCode => const ListEquality().hash([id, name, description]);
 }
 
 CriteriaStruct createCriteriaStruct({
   String? id,
   String? name,
   String? description,
-  int? position,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -143,7 +118,6 @@ CriteriaStruct createCriteriaStruct({
       id: id,
       name: name,
       description: description,
-      position: position,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

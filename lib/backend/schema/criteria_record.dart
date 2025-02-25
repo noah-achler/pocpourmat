@@ -26,11 +26,6 @@ class CriteriaRecord extends FirestoreRecord {
   String get description => _description ?? '';
   bool hasDescription() => _description != null;
 
-  // "position" field.
-  int? _position;
-  int get position => _position ?? 0;
-  bool hasPosition() => _position != null;
-
   // "timestamp" field.
   DateTime? _timestamp;
   DateTime? get timestamp => _timestamp;
@@ -39,7 +34,6 @@ class CriteriaRecord extends FirestoreRecord {
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _description = snapshotData['description'] as String?;
-    _position = castToType<int>(snapshotData['position']);
     _timestamp = snapshotData['timestamp'] as DateTime?;
   }
 
@@ -80,14 +74,12 @@ class CriteriaRecord extends FirestoreRecord {
 Map<String, dynamic> createCriteriaRecordData({
   String? name,
   String? description,
-  int? position,
   DateTime? timestamp,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'name': name,
       'description': description,
-      'position': position,
       'timestamp': timestamp,
     }.withoutNulls,
   );
@@ -102,13 +94,12 @@ class CriteriaRecordDocumentEquality implements Equality<CriteriaRecord> {
   bool equals(CriteriaRecord? e1, CriteriaRecord? e2) {
     return e1?.name == e2?.name &&
         e1?.description == e2?.description &&
-        e1?.position == e2?.position &&
         e1?.timestamp == e2?.timestamp;
   }
 
   @override
-  int hash(CriteriaRecord? e) => const ListEquality()
-      .hash([e?.name, e?.description, e?.position, e?.timestamp]);
+  int hash(CriteriaRecord? e) =>
+      const ListEquality().hash([e?.name, e?.description, e?.timestamp]);
 
   @override
   bool isValidKey(Object? o) => o is CriteriaRecord;

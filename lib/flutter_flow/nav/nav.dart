@@ -9,13 +9,14 @@ import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/lat_lng.dart';
 import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'serialization_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -92,33 +93,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
         ),
         FFRoute(
-          name: 'login',
-          path: '/login',
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'home',
-          path: '/home',
+          name: HomeWidget.routeName,
+          path: HomeWidget.routePath,
           builder: (context, params) => HomeWidget(),
         ),
         FFRoute(
-          name: 'step_list',
-          path: '/step_list',
+          name: StepListWidget.routeName,
+          path: StepListWidget.routePath,
           builder: (context, params) => StepListWidget(),
         ),
         FFRoute(
-          name: 'criteria',
-          path: '/criteria',
-          builder: (context, params) => CriteriaWidget(),
-        ),
-        FFRoute(
-          name: 'step_create',
-          path: '/step_create',
+          name: StepCreateWidget.routeName,
+          path: StepCreateWidget.routePath,
           builder: (context, params) => StepCreateWidget(),
         ),
         FFRoute(
-          name: 'step_update',
-          path: '/step_update',
+          name: StepUpdateWidget.routeName,
+          path: StepUpdateWidget.routePath,
           builder: (context, params) => StepUpdateWidget(
             ref: params.getParam(
               'ref',
@@ -129,9 +125,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'grid',
-          path: '/grid',
+          name: GridWidget.routeName,
+          path: GridWidget.routePath,
           builder: (context, params) => GridWidget(),
+        ),
+        FFRoute(
+          name: CriteriaListWidget.routeName,
+          path: CriteriaListWidget.routePath,
+          builder: (context, params) => CriteriaListWidget(),
+        ),
+        FFRoute(
+          name: CriteriaUpdateWidget.routeName,
+          path: CriteriaUpdateWidget.routePath,
+          builder: (context, params) => CriteriaUpdateWidget(
+            ref: params.getParam(
+              'ref',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['criteria'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: CriteriaCreateWidget.routeName,
+          path: CriteriaCreateWidget.routePath,
+          builder: (context, params) => CriteriaCreateWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

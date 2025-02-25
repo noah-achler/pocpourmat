@@ -11,33 +11,33 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'step_update_model.dart';
-export 'step_update_model.dart';
+import 'criteria_update_model.dart';
+export 'criteria_update_model.dart';
 
-class StepUpdateWidget extends StatefulWidget {
-  const StepUpdateWidget({
+class CriteriaUpdateWidget extends StatefulWidget {
+  const CriteriaUpdateWidget({
     super.key,
     required this.ref,
   });
 
   final DocumentReference? ref;
 
-  static String routeName = 'step_update';
-  static String routePath = '/step_update';
+  static String routeName = 'criteria_update';
+  static String routePath = '/criteria_update';
 
   @override
-  State<StepUpdateWidget> createState() => _StepUpdateWidgetState();
+  State<CriteriaUpdateWidget> createState() => _CriteriaUpdateWidgetState();
 }
 
-class _StepUpdateWidgetState extends State<StepUpdateWidget> {
-  late StepUpdateModel _model;
+class _CriteriaUpdateWidgetState extends State<CriteriaUpdateWidget> {
+  late CriteriaUpdateModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => StepUpdateModel());
+    _model = createModel(context, () => CriteriaUpdateModel());
 
     _model.nameFocusNode ??= FocusNode();
 
@@ -55,8 +55,8 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<StepsRecord>(
-      stream: StepsRecord.getDocument(widget!.ref!),
+    return StreamBuilder<CriteriaRecord>(
+      stream: CriteriaRecord.getDocument(widget!.ref!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -76,7 +76,7 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
           );
         }
 
-        final stepUpdateStepsRecord = snapshot.data!;
+        final criteriaUpdateCriteriaRecord = snapshot.data!;
 
         return GestureDetector(
           onTap: () {
@@ -135,7 +135,7 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                         child: TextFormField(
                           controller: _model.nameTextController ??=
                               TextEditingController(
-                            text: stepUpdateStepsRecord.name,
+                            text: criteriaUpdateCriteriaRecord.name,
                           ),
                           focusNode: _model.nameFocusNode,
                           autofocus: false,
@@ -206,7 +206,7 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                       child: TextFormField(
                         controller: _model.descriptionTextController ??=
                             TextEditingController(
-                          text: stepUpdateStepsRecord.description,
+                          text: criteriaUpdateCriteriaRecord.description,
                         ),
                         focusNode: _model.descriptionFocusNode,
                         autofocus: false,
@@ -282,15 +282,14 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                               10.0, 0.0, 10.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              await stepUpdateStepsRecord.reference
-                                  .update(createStepsRecordData(
+                              await criteriaUpdateCriteriaRecord.reference
+                                  .update(createCriteriaRecordData(
                                 name: _model.nameTextController.text,
                                 description:
                                     _model.descriptionTextController.text,
-                                timestamp: getCurrentTimestamp,
                               ));
 
-                              context.pushNamed(StepListWidget.routeName);
+                              context.pushNamed(CriteriaListWidget.routeName);
                             },
                             text: 'SAVE',
                             options: FFButtonOptions(
@@ -314,11 +313,12 @@ class _StepUpdateWidgetState extends State<StepUpdateWidget> {
                         ),
                         FFButtonWidget(
                           onPressed: () async {
-                            await stepUpdateStepsRecord.reference.delete();
+                            await criteriaUpdateCriteriaRecord.reference
+                                .delete();
                             if (Navigator.of(context).canPop()) {
                               context.pop();
                             }
-                            context.pushNamed(StepListWidget.routeName);
+                            context.pushNamed(CriteriaListWidget.routeName);
                           },
                           text: 'DELETE',
                           options: FFButtonOptions(

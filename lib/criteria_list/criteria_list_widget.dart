@@ -9,28 +9,28 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'step_list_model.dart';
-export 'step_list_model.dart';
+import 'criteria_list_model.dart';
+export 'criteria_list_model.dart';
 
-class StepListWidget extends StatefulWidget {
-  const StepListWidget({super.key});
+class CriteriaListWidget extends StatefulWidget {
+  const CriteriaListWidget({super.key});
 
-  static String routeName = 'step_list';
-  static String routePath = '/step_list';
+  static String routeName = 'criteria_list';
+  static String routePath = '/criteria_list';
 
   @override
-  State<StepListWidget> createState() => _StepListWidgetState();
+  State<CriteriaListWidget> createState() => _CriteriaListWidgetState();
 }
 
-class _StepListWidgetState extends State<StepListWidget> {
-  late StepListModel _model;
+class _CriteriaListWidgetState extends State<CriteriaListWidget> {
+  late CriteriaListModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => StepListModel());
+    _model = createModel(context, () => CriteriaListModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -54,7 +54,7 @@ class _StepListWidgetState extends State<StepListWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            context.pushNamed(StepCreateWidget.routeName);
+            context.pushNamed(CriteriaCreateWidget.routeName);
           },
           backgroundColor: FlutterFlowTheme.of(context).primary,
           elevation: 8.0,
@@ -104,10 +104,10 @@ class _StepListWidgetState extends State<StepListWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: StreamBuilder<List<StepsRecord>>(
-                  stream: queryStepsRecord(
-                    queryBuilder: (stepsRecord) =>
-                        stepsRecord.orderBy('timestamp'),
+                child: StreamBuilder<List<CriteriaRecord>>(
+                  stream: queryCriteriaRecord(
+                    queryBuilder: (criteriaRecord) =>
+                        criteriaRecord.orderBy('timestamp'),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -124,16 +124,17 @@ class _StepListWidgetState extends State<StepListWidget> {
                         ),
                       );
                     }
-                    List<StepsRecord> listViewStepsRecordList = snapshot.data!;
+                    List<CriteriaRecord> listViewCriteriaRecordList =
+                        snapshot.data!;
 
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: listViewStepsRecordList.length,
+                      itemCount: listViewCriteriaRecordList.length,
                       itemBuilder: (context, listViewIndex) {
-                        final listViewStepsRecord =
-                            listViewStepsRecordList[listViewIndex];
+                        final listViewCriteriaRecord =
+                            listViewCriteriaRecordList[listViewIndex];
                         return InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -141,10 +142,10 @@ class _StepListWidgetState extends State<StepListWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             context.pushNamed(
-                              StepUpdateWidget.routeName,
+                              CriteriaUpdateWidget.routeName,
                               queryParameters: {
                                 'ref': serializeParam(
-                                  listViewStepsRecord.reference,
+                                  listViewCriteriaRecord.reference,
                                   ParamType.DocumentReference,
                                 ),
                               }.withoutNulls,
@@ -154,7 +155,7 @@ class _StepListWidgetState extends State<StepListWidget> {
                             color: Colors.transparent,
                             child: ListTile(
                               title: Text(
-                                listViewStepsRecord.name,
+                                listViewCriteriaRecord.name,
                                 style: FlutterFlowTheme.of(context)
                                     .titleLarge
                                     .override(
@@ -163,7 +164,7 @@ class _StepListWidgetState extends State<StepListWidget> {
                                     ),
                               ),
                               subtitle: Text(
-                                listViewStepsRecord.description,
+                                listViewCriteriaRecord.description,
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(

@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,9 @@ export 'grid_model.dart';
 
 class GridWidget extends StatefulWidget {
   const GridWidget({super.key});
+
+  static String routeName = 'grid';
+  static String routePath = '/grid';
 
   @override
   State<GridWidget> createState() => _GridWidgetState();
@@ -74,7 +78,7 @@ class _GridWidgetState extends State<GridWidget> {
                 await authManager.signOut();
                 GoRouter.of(context).clearRedirectLocation();
 
-                context.goNamedAuth('login', context.mounted);
+                context.goNamedAuth(LoginWidget.routeName, context.mounted);
               },
             ),
           ],

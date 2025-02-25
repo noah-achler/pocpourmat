@@ -7,13 +7,13 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/index.dart';
-import 'step_update_widget.dart' show StepUpdateWidget;
+import 'criteria_update_widget.dart' show CriteriaUpdateWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class StepUpdateModel extends FlutterFlowModel<StepUpdateWidget> {
+class CriteriaUpdateModel extends FlutterFlowModel<CriteriaUpdateWidget> {
   ///  Local state fields for this page.
 
   StepStruct? step;
